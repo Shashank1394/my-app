@@ -1,35 +1,10 @@
-async function getRegion() {
-  try {
-    const res = await fetch(
-      `${process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000"}/api/region`,
-      { cache: "no-store" },
-    );
+export const dynamic = "force-dynamic";
 
-    return await res.json();
-  } catch {
-    return { vercelRegion: "unknown" };
-  }
-}
-
-export default async function Home() {
-  const data = await getRegion();
-
+export default function Home() {
   return (
-    <main
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        fontFamily: "sans-serif",
-      }}
-    >
-      <div>
-        <h1>Vercel Region Test</h1>
-        <p>
-          Function Region: <strong>{data.vercelRegion}</strong>
-        </p>
-      </div>
+    <main>
+      <h1>Hello from Hong Kong</h1>
+      <p>Region: {process.env.VERCEL_REGION}</p>
     </main>
   );
 }
